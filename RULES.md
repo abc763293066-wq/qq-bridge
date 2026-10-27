@@ -1,5 +1,9 @@
 # QQ 桥接权限与安全规则（RULES）
 
+## Provider 范围
+
+以下四模式与控制台规则适用于默认 `dsh` provider。`codex` provider 的独立权限策略见 [CODEX_SETUP.md](docs/guides/CODEX_SETUP.md)：allow/deny 先于投递，群/好友会话隔离，默认关闭命令和 MCP；仅显式配置的 owner 私聊可开启工作目录内工具，新增权限请求一律拒绝。切换 provider 需停止并重启，不跨 provider 迁移历史或自动故障转移。
+
 ## 运行模式（QQ 桥接四模式）
 
 模式由**桥接控制台**（默认 `http://127.0.0.1:3100`）顶部的模式按钮切换，也可直接改 DSH 设置的 `qq-mode` 命名空间；

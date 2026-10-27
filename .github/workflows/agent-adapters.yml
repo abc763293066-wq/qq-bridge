@@ -1,0 +1,27 @@
+name: Agent adapters
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  offline:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node: [22, 24]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run test:agents
+      - run: node --test src/core/session-router.test.mjs
+      - run: node scripts/test-audit-bridge.mjs
+      - run: node scripts/test-audit-protocol.mjs
+      - run: node scripts/test-audit-security.mjs
+      - run: node scripts/test-audit-security-mcp.mjs
+      - run: node scripts/test-audit-protocol-helpers.mjs
+      - run: node scripts/test-mux-reconnect.mjs
+      - run: node scripts/test-audit-setup-guards.mjs

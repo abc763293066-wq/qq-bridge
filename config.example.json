@@ -1,4 +1,22 @@
 {
+  "agent": { "provider": "dsh" },
+  "codex": {
+    "binary": "codex.exe",
+    "home": "C:/qq-bridge-codex-home",
+    "model": "",
+    "effort": "medium",
+    "ownerLocalTools": false,
+    "ownerMcp": false,
+    "groupRequireMention": true,
+    "progress": true,
+    "requestTimeoutMs": 15000,
+    "turnTimeoutMs": 180000,
+    "retries": 2,
+    "maxSessions": 8,
+    "maxQueue": 4,
+    "idleTimeoutMs": 900000,
+    "maxInputChars": 12000
+  },
   "dsh": {
     "baseUrl": "http://127.0.0.1:3080",
     "provider": "deepseek-official",

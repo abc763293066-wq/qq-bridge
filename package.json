@@ -3,13 +3,16 @@
   "version": "0.2.1-r1",
   "private": true,
   "license": "MIT",
-  "description": "Bridge between SnowLuma (OneBot v11 / QQ) and DeepSeek Harness Web API: QQ messages become DSH agent prompts, agent replies go back to QQ. Targets the DSH Cookie-auth / slash-RPC / remote.mux protocol generation, so it deliberately names no DSH version here.",
+  "description": "QQ / OneBot v11 bridge with configurable DeepSeek Harness and OpenAI Codex App Server providers. Preserves DSH Cookie-auth, slash-RPC and remote.mux support; Codex uses local stdio JSON-RPC.",
   "type": "module",
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
-    "start": "node src/bridge.js",
+    "start": "node src/start-bridge.js",
+    "start:dsh": "node src/bridge.js",
+    "test:agents": "node --test test/agents.test.js",
+    "probe:codex": "node scripts/probe-codex.mjs",
     "test:audit": "node scripts/test-audit.mjs",
     "test:token": "node scripts/test-token-economy.mjs && node scripts/test-reply-wait.mjs && node scripts/test-qq-model-view.mjs && node scripts/test-qq-preset-contract.mjs",
     "test:tokens": "node scripts/test-token-usage.mjs",
