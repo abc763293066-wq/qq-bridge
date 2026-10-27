@@ -1,0 +1,27 @@
+[Unit]
+Description=QQ agent bridge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=qqbridge
+Group=qqbridge
+WorkingDirectory=/srv/qq-bridge
+ExecStart=/usr/bin/node /srv/qq-bridge/src/start-bridge.js
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+Environment=CODEX_HOME=/srv/qq-codex/home
+UMask=0077
+Restart=on-failure
+RestartPreventExitStatus=2
+RestartSec=5
+KillMode=control-group
+TimeoutStopSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/qq-bridge/state /srv/qq-codex/home
+
+[Install]
+WantedBy=multi-user.target

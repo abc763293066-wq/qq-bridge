@@ -1,4 +1,10 @@
-# QQ ↔ DeepSeek Harness Bridge (qq-bridge)
+# QQ ↔ DeepSeek Harness / OpenAI Codex Bridge (qq-bridge)
+
+Set `agent.provider` to `dsh` (the backward-compatible default) or `codex`, then use `npm start`, `node src/start-bridge.js`, or `start.bat`. The Codex provider uses the official local App Server stdio JSON-RPC interface, with isolated friend/group threads, multi-turn history, bounded queues, generic streamed progress, restricted tools and cancellation.
+
+See [Codex setup and authentication](docs/guides/CODEX_SETUP.md), [Linux example](config.codex.linux.example.json), and [Windows/full example](config.example.json). Install/authenticate Codex yourself and configure the gateway WebSocket token and QQ allowlists. Run `npm run test:agents` for offline tests and `npm run probe:codex` for a real local protocol check without inference or QQ sends.
+
+The original DSH modes, console, media and QQ MCP v2 features described below remain DSH-specific. Codex currently handles message-triggered text conversations and independent owner-configured MCP; it does not emulate the DSH control plane. `npm run start:dsh` / `node src/bridge.js` explicitly launch DSH.
 
 > Connect QQ messages to DeepSeek Harness (DSH) agents: QQ friends/groups become DSH conversations, and agent replies (including questions and tool approvals) are sent back to QQ.
 

@@ -48,8 +48,9 @@ import fs from 'node:fs';
   assert.equal(nonAscii, 0, 'start.bat 必须保持纯 ASCII（否则非 UTF-8 控制台会乱码）');
   assert.equal(batText.match(/(?<!\r)\n/g)?.length ?? 0, 0, 'start.bat 必须使用 CRLF');
   assert.ok(batText.includes('harden-state-acl.mjs'), 'start.bat 必须在启动桥接前调用 ACL 助手');
-  // 助手必须排在 node src/bridge.js 之前，否则"启动时收紧"就不成立
-  assert.ok(batText.indexOf('harden-state-acl.mjs') < batText.indexOf('node src/bridge.js'), 'ACL 助手必须先于桥接启动');
+  // Both providers use the dispatcher; ACL hardening must still precede it.
+  const entryIndex = batText.indexOf('node src/start-bridge.js');
+  assert.ok(entryIndex >= 0 && batText.indexOf('harden-state-acl.mjs') < entryIndex, 'ACL 助手必须先于桥接启动');
   console.log('state ACL hardening: helper is non-blocking, recursion-guarded, and wired into start.bat');
 }
 

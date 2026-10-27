@@ -1,4 +1,10 @@
-# QQ ↔ DeepSeek Harness 桥接
+# QQ ↔ DeepSeek Harness / OpenAI Codex 桥接
+
+支持通过 `agent.provider` 选择 `dsh`（默认，保留原有功能）或 `codex`。统一入口为 `npm start` / `node src/start-bridge.js` / `start.bat`。Codex 使用官方 App Server 的本地 stdio JSON-RPC，支持好友/群隔离、多轮会话、进度通知、超时取消和受限工具；不会自动授予 QQ 用户新增主机权限。
+
+**Codex 部署、身份认证、配置示例与功能限制：[CODEX_SETUP.md](docs/guides/CODEX_SETUP.md)**。Linux 最小配置见 [config.codex.linux.example.json](config.codex.linux.example.json)，Windows 从 [config.example.json](config.example.json) 开始。需要自行安装并登录 Codex、配置 OneBot WebSocket token 和 QQ allowlist。
+
+`npm run test:agents` 运行离线适配测试；`npm run probe:codex` 检查本机真实 App Server 协议，不发送 QQ 消息或运行付费推理。下文原有 DSH 四模式、控制台、语音/表情等说明适用于 **DSH provider**；Codex 当前提供按消息触发的文本会话，不复用 DSH 控制台与 QQ MCP v2 工具。`node src/bridge.js` / `npm run start:dsh` 为显式 DSH 入口。
 
 **English**: [README.en.md](README.en.md) | **中文**: [README.md](README.md)
 
